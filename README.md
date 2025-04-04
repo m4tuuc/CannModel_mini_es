@@ -1,6 +1,7 @@
 ## 🌿 CannModel mini version español
-       Recomendador de cepas de cannabis en español, puedes testearlo .
-↓↓↓
+       Recomendador de cepas de cannabis en español, disponible en mi Huggin Face Space.
+
+
 [![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-blue?logo=huggingface)](https://huggingface.co/spaces/M4tuuc/cannmodel_es)    
 ---
 
