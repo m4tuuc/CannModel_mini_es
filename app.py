@@ -45,7 +45,7 @@ def load_model():
         model.wv.save("model_gensim.kv")
         return model.wv
 
-# Cargar datos y modelo
+
 df = load_data()
 model = load_model()
 
@@ -85,10 +85,9 @@ if 'active_tab' not in st.session_state:
 if 'selected_strain' not in st.session_state:
     st.session_state.selected_strain = None
 
-# Sidebar para entrada de efecto y botón de refresh
+# Sidebar para entrada de efecto y boton de refresh.
 seleccion = st.sidebar.selectbox('Cepa (100 muestras)', options=df['Cepa'], index=0)
 
-# Modificar el botón de seleccionar para cambiar a la tab3 y guardar la cepa seleccionada
 if st.sidebar.button("Seleccionar"):
     st.session_state.selected_strain = seleccion
     st.session_state.active_tab = "tab3"
@@ -96,7 +95,7 @@ if st.sidebar.button("Seleccionar"):
 efecto_buscado = st.sidebar.text_input("🔍 Escribe el efecto deseado", "")
 refresh = st.sidebar.button("🔄 Actualizar cepas")
 
-# Verificar si el efecto ha cambiado
+
 efecto_cambio = efecto_buscado != st.session_state.efecto_anterior
 
 # Actualizar cepas SOLO si el efecto cambia o se presiona Refresh
@@ -107,12 +106,12 @@ if efecto_cambio or refresh:
         st.session_state.cepas = df.sample(3)
     st.session_state.efecto_anterior = efecto_buscado
 
-# Crear pestañas
+#pestañas
 tab1, tab2, tab3 = st.tabs(["Recomendaciones", "Gráficos y Comparativas", "General"])
 
 # Pestaña 1: Recomendaciones y detalles
 with tab1:
-    # Mostrar las 3 cepas recomendadas en columnas alineadas
+    # Mostrar las 3 cepas recomendadas
     st.write("Cepas recomendadas:")
     cols = st.columns(3)
     for i, (_, row) in enumerate(st.session_state.cepas.iterrows()):
@@ -120,7 +119,6 @@ with tab1:
             # Truncar nombre si es muy largo
             nombre = row["Cepa"][:20] + "..." if len(row["Cepa"]) > 20 else row["Cepa"]
             st.subheader(nombre)
-            # Modificar el botón para también cambiar a la tab3
             if st.button("Seleccionar", key=f"btn_{i}"):
                 st.session_state.cepa_seleccionada = row
                 st.session_state.selected_strain = row["Cepa"]
@@ -288,7 +286,7 @@ with tab3:
             for sabor in strain_data["Sabor"].split(", "):
                 st.write(f"- {sabor}")
         
-        # Botón para volver
+        # Boton para volver
         if st.button("← Volver a Recomendaciones"):
             st.session_state.active_tab = "tab1"
             st.experimental_rerun()
@@ -313,5 +311,4 @@ if st.session_state.active_tab == "tab3":
         """
         st.components.v1.html(js, height=0)
     except:
-        # Si hay algún error con el JavaScript, no hacemos nada
         pass
