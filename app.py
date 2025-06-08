@@ -49,7 +49,7 @@ def load_model():
 df = load_data()
 model = load_model()
 
-# Generar embeddings para las cepas
+
 df["embedding"] = df["train"].apply(
     lambda x: np.mean([model[word] for word in x.lower().split() if word in model], axis=0)
     if any(word in model for word in x.lower().split())
@@ -75,7 +75,7 @@ def get_cepas_similares(efecto_usuario, n=3, top_n=10):
 st.title("🌿 Recomendador de cepas de cannabis")
 st.subheader("Recomendaciones basadas en efectos deseados")
 
-# Inicializar el estado si no existe
+
 if 'cepas' not in st.session_state:
     st.session_state.cepas = df.sample(3)
 if 'efecto_anterior' not in st.session_state:
